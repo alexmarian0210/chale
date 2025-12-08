@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Café da Manhã</title>
+    <style>
+        /* Estilização Geral (CSS) */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f1ea;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px; /* Adicionado padding para telas menores */
+            box-sizing: border-box;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+            border-top: 5px solid #d4a373;
+        }
+
+        h1 {
+            text-align: center;
+            color: #6f4e37;
+            margin-bottom: 1.5rem;
+        }
+
+        fieldset {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #d4a373;
+            padding: 0 10px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        label:hover {
+            color: #d4a373;
+        }
+
+        /* Estilo para os novos inputs de texto e data */
+        .input-text {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box; /* Garante que o padding não estoure a largura */
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .input-text:focus {
+            outline: none;
+            border-color: #d4a373;
+            box-shadow: 0 0 5px rgba(212, 163, 115, 0.5);
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 10px;
+            accent-color: #d4a373; 
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #6f4e37;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #5a3e2b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h1>☕ Monte seu Café</h1>
+    
+    <form id="breakfastForm" onsubmit="enviarPedido(event)">
+        
+        <fieldset>
+            <legend>Seus Dados</legend>
+            <label>
+                Nome Completo:
+                <input type="text" id="nomeCliente" name="nome" class="input-text" placeholder="Digite seu nome" required>
+            </label>
+            <label>
+                Data do Pedido:
+                <input type="date" name="data" class="input-text" required>
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Escolha 1 tipo de Pão</legend>
+            <label>
+                <input type="radio" name="pao" value="frances" required> Pão Francês
+            </label>
+            <label>
+                <input type="radio" name="pao" value="queijo"> Pão de Queijo
+            </label>
+            <label>
+                <input type="radio" name="pao" value="integral"> Pão Integral
+            </label>
+            <label>
+                <input type="radio" name="pao" value="torrada"> Torrada
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Escolha 1 Embutido/Frio</legend>
+            <label>
+                <input type="radio" name="frios" value="presunto" required> Presunto
+            </label>
+            <label>
+                <input type="radio" name="frios" value="queijo_prato"> Queijo Prato
+            </label>
+            <label>
+                <input type="radio" name="frios" value="peito_peru"> Peito de Peru
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Escolha até 2 Frutas</legend>
+            <label>
+                <input type="checkbox" name="fruta" value="mamao" class="fruta-check"> Mamão
+            </label>
+            <label>
+                <input type="checkbox" name="fruta" value="banana" class="fruta-check"> Banana
+            </label>
+            <label>
+                <input type="checkbox" name="fruta" value="melancia" class="fruta-check"> Melancia
+            </label>
+            <label>
+                <input type="checkbox" name="fruta" value="uva" class="fruta-check"> Uva
+            </label>
+            <label>
+                <input type="checkbox" name="fruta" value="maca" class="fruta-check"> Maçã
+            </label>
+        </fieldset>
+
+        <button type="submit">Fazer Pedido</button>
+    </form>
+</div>
+
+<script>
