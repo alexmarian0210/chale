@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedido de Café da Manhã</title>
     <style>
-        /* CSS / Estilização */
+        /* Estilos do Formulário */
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f1ea; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
         .form-container { background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 500px; width: 100%; border-top: 5px solid #d4a373; }
         h1 { text-align: center; color: #6f4e37; margin-bottom: 1.5rem; }
@@ -71,7 +71,7 @@
 </div>
 
 <script>
-    // Lógica das frutas (Máximo 2)
+    // --- Lógica das frutas (Máximo 2) ---
     const checkboxes = document.querySelectorAll('.fruta-check');
     const maxFrutas = 2;
 
@@ -94,19 +94,19 @@
         });
     });
 
-    // Lógica de Envio para a Planilha
+    // --- Lógica de Envio ---
     function enviarPedido() {
         const form = document.getElementById('breakfastForm');
         const btn = document.getElementById('btnEnviar');
         const nome = document.getElementById('nomeCliente').value;
 
-        // 1. Validação básica
+        // Validação
         if (!form.checkValidity()) {
             form.reportValidity();
             return;
         }
 
-        // 2. Feedback visual (carregando)
+        // Feedback visual
         btn.textContent = "Enviando...";
         btn.classList.add("loading");
         btn.disabled = true;
@@ -114,15 +114,13 @@
         const data = new FormData(form);
 
         // ======================================================================
-        // 👇👇👇 COLE SEU LINK DO SHEETMONKEY AQUI DENTRO DAS ASPAS 👇👇👇
-        // Exemplo: "https://api.sheetmonkey.io/form/SeuCodigoAleatorio"
+        // 👇👇👇 COLE O LINK DO SHEETMONKEY AQUI EMBAIXO 👇👇👇
         // ======================================================================
         
-        const SHEET_URL = "https://docs.google.com/spreadsheets/d/12OdQqzs_bJnHJyCcs0nOOya-geShxAWKOynUUuEZt4Y/edit?gid=0#gid=0"; 
+        const SHEET_URL = "https://docs.google.com/spreadsheets/d/1e0L3EBbUV0cFCxPOJag7ewom_jM-rvGLWrBFIq2nzIY/edit?gid=1314831166#gid=1314831166"; 
 
         // ======================================================================
 
-        // 3. Envio dos dados
         fetch(SHEET_URL, {
             method: 'POST',
             body: data,
@@ -138,7 +136,7 @@
             });
         })
         .catch(error => {
-            alert("Erro ao conectar com a planilha. Verifique se o link está correto no código.");
+            alert("Erro! Verifique o link no código.");
             console.error('Erro:', error);
         })
         .finally(() => {
