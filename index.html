@@ -152,6 +152,43 @@
             btn.disabled = false;
         });
     }
+
+    function limparPedidosAntigos() {
+  var nomeDaAba = "Página1"; // Se sua aba tiver outro nome, mude aqui
+  var diasParaManter = 15;   // Mantém os últimos 15 dias
+  
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nomeDaAba);
+  
+  // Verifica se a aba existe para não dar erro
+  if (!sheet) {
+    Logger.log("Aba não encontrada: " + nomeDaAba);
+    return;
+  }
+
+  var data = sheet.getDataRange().getValues();
+  var hoje = new Date();
+  
+  // Começa a verificar da última linha para cima (para não pular linhas ao deletar)
+  // O "i >= 1" garante que ele pare antes de apagar o Cabeçalho (linha 0)
+  for (var i = data.length - 1; i >= 1; i--) {
+    
+    // O número [1] representa a Coluna B (Data). 
+    // Se a data estiver na Coluna C, mude para [2], etc.
+    var dataPedido = new Date(data[i][1]); 
+    
+    // Se não tiver data válida, ignora
+    if (!dataPedido || isNaN(dataPedido.getTime())) continue;
+
+    // Calcula a diferença em dias
+    var diferencaTempo = hoje - dataPedido;
+    var diferencaDias = Math.floor(diferencaTempo / (1000 * 60 * 60 * 24));
+
+    // Se for mais velho que 15 dias, deleta
+    if (diferencaDias > diasParaManter) {
+      sheet.deleteRow(i + 1); 
+    }
+  }
+}
 </script>
 
 </body>
